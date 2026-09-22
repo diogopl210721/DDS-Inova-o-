@@ -9,7 +9,7 @@ Deno.serve(async(req)=>{
   if(req.method!=='POST') return json({error:'Método não permitido'},405)
   const auth=req.headers.get('Authorization'); if(!auth) return json({error:'Não autenticado'},401)
   const url=Deno.env.get('SUPABASE_URL')!; const publishable=JSON.parse(Deno.env.get('SUPABASE_PUBLISHABLE_KEYS')||'{}').default
-  const sb=createClient(url,publishable,{global:{headers:{Authorization:auth}}})
+  const sb=createClient(url,publishable,{global:{headers:{Authorization:auth}},db:{schema:'dds_flow'}})
   const {data:{user},error:userError}=await sb.auth.getUser(); if(userError||!user) return json({error:'Sessão inválida'},401)
   const key=Deno.env.get('ANTHROPIC_API_KEY'); if(!key) return json({error:'Claude não configurado'},503)
   const input=await req.json(); const kind=input.kind
