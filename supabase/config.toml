@@ -1,0 +1,4 @@
+project_id = "dds-flow"
+
+[functions.ai-assistant]
+verify_jwt = true
