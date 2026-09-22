@@ -2,7 +2,7 @@ import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from './config.js';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const configured = Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY);
-const supabase = configured ? createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
+const supabase = configured ? createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, { db: { schema: 'dds_flow' } }) : null;
 const state = { user:null, profile:null, route:'day', demands:[], clients:[], contacts:[], contracts:[], attachments:[], demo:!configured };
 const $ = (s,root=document)=>root.querySelector(s);
 const $$ = (s,root=document)=>[...root.querySelectorAll(s)];
